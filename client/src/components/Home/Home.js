@@ -18,6 +18,9 @@ const Home = () => {
     dispatch(getStories());
   }, [dispatch]);
 
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const username = user?.result?.username;
+
   return (
     <Layout>
       <Content style={styles.content}>
@@ -27,7 +30,9 @@ const Home = () => {
             type='primary'
             style={styles.input}
             onClick={() => setVisible(true)}
-            placeholder='So, tell me something'
+            value={`So ${username}, tell me something...`}
+            allowClear={false}
+            
           />
           <StoryForm visible={visible} onCancel={() => setVisible(false)} setSelectedId={setSelectedId} selectedId={selectedId}/>
         </Card>

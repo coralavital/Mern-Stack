@@ -13,6 +13,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './styles';
+import MediaLibrary from '../MediaLibrary/MediaLibrary';
 
 const { Title } = Typography;
 
@@ -26,6 +27,13 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
 
   const user = JSON.parse(localStorage.getItem('profile'));
   const username = user?.result?.username;
+
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
 
   const onSubmit = (formValues) => {
     selectedId
@@ -83,31 +91,12 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
           <Input.TextArea allowClear autoSize={{ minRows: 2, maxRows: 6 }} />
         </Form.Item>
         <Form.Item name='tags' label='Tags'>
-          <Input.TextArea allowClear autoSize={{ minRows: 2, maxRows: 6 }} />
+          <Input.TextArea allowClear autoSize={{ minRows: 1, maxRows: 2 }} />
         </Form.Item>
-        <Form.Item name='image' label='Image' rules={[{ required: true }]}>
-          <FileBase64
-            type='file'
-            multiple={false}
-            onDone={(e) => {
-              form.setFieldsValue({ image: e.base64 });
-            }}
-          />
+        <Form.Item name='image' label='Image' rules={[{ required: true }]}  valuePropName="fileList" getValueFromEvent={normFile}>
+          <MediaLibrary form={form}/>
         </Form.Item>
-        {/* <Form.Item label="Upload" valuePropName="fileList" getValueFromEvent={getFile}>
-          <Upload beforeUpload={false} action={false} listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div
-                style={{
-                  marginTop: 8,
-                }}
-              >
-                Upload
-              </div>
-            </div>
-          </Upload>
-        </Form.Item> */}
+       
         {!selectedId ? (
           <Form.Item wrapperCol={{ span: 16, offset: 6 }}>
             <Button type='primary' block htmlType='submit'>
