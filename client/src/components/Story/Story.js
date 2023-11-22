@@ -1,6 +1,6 @@
 import { EditOutlined, DeleteTwoTone, HeartTwoTone } from "@ant-design/icons";
-import { deleteStory, likeStory } from '../../actions/stories';
-import { Card, Tooltip, Typography, Image } from "antd";
+import { deleteStory, likeStory, updateStory } from '../../actions/stories';
+import { Card, Tooltip, Typography, Image, Carousel } from "antd";
 import { useDispatch } from "react-redux";
 import React, { useState } from 'react';
 import moment from 'moment';
@@ -31,6 +31,7 @@ function Story({ story, setSelectedId }) {
     <Tooltip
       placement='top'
       title='Edit'
+      onClick={() => { dispatch(updateStory(story, story._id)) }}
     >
       <EditOutlined onClick={() => {
         setSelectedId(story._id);
@@ -48,7 +49,7 @@ function Story({ story, setSelectedId }) {
   return (
     <Card
       style={styles.card}
-      cover={<Image src={story.image}/>}
+      cover={<Carousel infinite={false} effect="fade">{story.images.map((image, index) =>  {return <div key={index}><Image height={427} width={421} src={image} /></div>})}</Carousel>}
       actions={
         user?.result?._id === story?.userId ?
           cardActions :

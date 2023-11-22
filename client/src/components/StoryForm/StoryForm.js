@@ -28,6 +28,8 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
   const user = JSON.parse(localStorage.getItem('profile'));
   const username = user?.result?.username;
 
+  const images = [];
+
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -93,10 +95,10 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
         <Form.Item name='tags' label='Tags'>
           <Input.TextArea allowClear autoSize={{ minRows: 1, maxRows: 2 }} />
         </Form.Item>
-        <Form.Item name='image' label='Image' rules={[{ required: true }]}  valuePropName="fileList" getValueFromEvent={normFile}>
-          <MediaLibrary form={form}/>
+        <Form.Item name='images' label='Images' rules={[{ required: true }]}  valuePropName="fileList" getValueFromEvent={normFile}
+        >
+          <MediaLibrary form={form} />
         </Form.Item>
-       
         {!selectedId ? (
           <Form.Item wrapperCol={{ span: 16, offset: 6 }}>
             <Button type='primary' block htmlType='submit'>
