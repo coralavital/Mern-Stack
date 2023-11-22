@@ -34,10 +34,10 @@ const Home = () => {
             allowClear={false}
             
           />
-          <StoryForm visible={visible} onCancel={() => setVisible(false)} setSelectedId={setSelectedId} selectedId={selectedId}/>
+          <StoryForm visible={visible} setVisible={setVisible} setSelectedId={setSelectedId} selectedId={selectedId}/>
         </Card>
         </div>
-        <StoryList setSelectedId={setSelectedId} />
+        <StoryList setSelectedId={setSelectedId} setVisible={setVisible} />
       </Content>
     </Layout>
   );

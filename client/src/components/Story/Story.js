@@ -10,7 +10,7 @@ import styles from './styles';
 const { Meta } = Card;
 const { Link, Paragraph, Text } = Typography;
 
-function Story({ story, setSelectedId }) {
+function Story({ story, setSelectedId, setVisible }) {
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(true);
 
@@ -31,11 +31,12 @@ function Story({ story, setSelectedId }) {
     <Tooltip
       placement='top'
       title='Edit'
-      onClick={() => { dispatch(updateStory(story, story._id)) }}
-    >
-      <EditOutlined onClick={() => {
+      onClick={() => {
         setSelectedId(story._id);
-      }} />
+        setVisible(true);
+      }}
+    >
+      <EditOutlined twoToneColor='grey' />
     </Tooltip>,
     <Tooltip
       placement='top'

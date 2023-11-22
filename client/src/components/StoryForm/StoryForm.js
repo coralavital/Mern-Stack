@@ -1,12 +1,5 @@
 import { createStory, updateStory } from '../../actions/stories';
-import {
-  Card,
-  Form,
-  Input,
-  Typography,
-  Button,
-  Modal,
-} from 'antd';
+import { Card, Form, Input, Typography, Button, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase64 from 'react-file-base64';
 import React, { useEffect } from 'react';
@@ -17,7 +10,7 @@ import MediaLibrary from '../MediaLibrary/MediaLibrary';
 
 const { Title } = Typography;
 
-function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
+function StoryForm({ selectedId, setSelectedId, visible, setVisible }) {
   const story = useSelector((state) =>
     selectedId ? state.stories.find((story) => story._id === selectedId) : null
   );
@@ -28,13 +21,15 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
   const user = JSON.parse(localStorage.getItem('profile'));
   const username = user?.result?.username;
 
-  const images = [];
-
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
     }
     return e?.fileList;
+  };
+
+  const onCancel = () => {
+    setVisible(false);
   };
 
   const onSubmit = (formValues) => {
@@ -95,7 +90,12 @@ function StoryForm({ selectedId, setSelectedId, visible, onCancel }) {
         <Form.Item name='tags' label='Tags'>
           <Input.TextArea allowClear autoSize={{ minRows: 1, maxRows: 2 }} />
         </Form.Item>
-        <Form.Item name='images' label='Images' rules={[{ required: true }]}  valuePropName="fileList" getValueFromEvent={normFile}
+        <Form.Item
+          name='images'
+          label='Images'
+          rules={[{ required: true }]}
+          valuePropName='fileList'
+          getValueFromEvent={normFile}
         >
           <MediaLibrary form={form} />
         </Form.Item>
