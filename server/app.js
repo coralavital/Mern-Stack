@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from "dotenv";
-
+import storyRoutes from './routes/stories.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 dotenv.config();
@@ -12,9 +13,7 @@ app.use(bodyParser.json({ limit: "32mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "32mb", extended: true }));
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send("welcome to the instaverse api");
-})
+app.use("/stories", storyRoutes);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5001;
