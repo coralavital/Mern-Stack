@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getStories, createStory, updateStory, deleteStory, likeStory } from "../controllers/stories.js";
 const router = Router();
 
+import authentication from "../middleware/authentication.js";
 
 
 router.get('/', getStories);
