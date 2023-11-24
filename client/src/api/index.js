@@ -19,6 +19,9 @@ export const createStory = async (story) => api.post("/stories", story);
 export const updateStory = async (id, story) => api.patch(`${"/stories"}/${id}`, story);
 export const deleteStory = async (id) => api.delete(`${"/stories"}/${id}`);
 export const likeStory = async (id) => api.patch(`${"/stories"}/${id}/likeStory`);
+export const addComment = async (id, comment) => api.patch(`${"/stories"}/${id}/addComment`, comment);
+export const deleteComment = async (id, comment) => api.patch(`${"/stories"}/${id}/deleteComment`, comment);
+// export const likeComment = async (id, comment) => api.patch(`${"/stories"}/${id}/likeComment`, comment);
 
 
 export const login = async (formValues) => api.post("/user/login", formValues);

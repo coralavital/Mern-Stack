@@ -19,7 +19,7 @@ const login = async (req, res) => {
             return res.status(400).json({ msg: "Invalid password" });
         }
 
-        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, "1234", { expiresIn: "1h" });
+        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, "1234", { expiresIn: "3h" });
 
         res.status(200).json({ result: oldUser, token });
 
@@ -48,7 +48,7 @@ const signup = async (req, res) => {
 
         const result = await User.create({ username, email, password: encryptedPassword });
 
-        const token = jwt.sign({ email: result.email, id: result._id }, "1234", { expiresIn: "1h" });
+        const token = jwt.sign({ email: result.email, id: result._id }, "1234", { expiresIn: "3h" });
 
         res.status(201).json({ result, token });
 

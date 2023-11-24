@@ -7,13 +7,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  contentStyle: {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-  },
 };
 
 export default styles;

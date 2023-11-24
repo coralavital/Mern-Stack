@@ -1,7 +1,6 @@
 import { createStory, updateStory } from '../../actions/stories';
 import { Card, Form, Input, Typography, Button, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import FileBase64 from 'react-file-base64';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -72,7 +71,7 @@ function StoryForm({ selectedId, setSelectedId, visible, setVisible }) {
         {selectedId ? 'Editing' : 'Share'} a story
       </Title>
       okText='Submit'
-      onCancel={onCancel}
+      onCancel={reset}
       onOk={onCancel}
       footer={[]}
     >
@@ -97,7 +96,7 @@ function StoryForm({ selectedId, setSelectedId, visible, setVisible }) {
           valuePropName='fileList'
           getValueFromEvent={normFile}
         >
-          <MediaLibrary form={form} />
+          <MediaLibrary form={form} story={story} selectedId={selectedId} />
         </Form.Item>
         {!selectedId ? (
           <Form.Item wrapperCol={{ span: 16, offset: 6 }}>

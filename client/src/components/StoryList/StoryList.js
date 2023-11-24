@@ -3,7 +3,7 @@ import { Row, Col, Spin } from "antd";
 import Story from '../Story';
 import { useSelector } from "react-redux";
 
-function StoryList({ setSelectedId, selectedId, setVisible }) {
+function StoryList({ setSelectedId, setVisible }) {
   const stories = useSelector((state) => state.stories);
 
   console.log('stories', stories)
@@ -16,7 +16,7 @@ function StoryList({ setSelectedId, selectedId, setVisible }) {
        {stories.map((story) => {
          return (
           <Col key={story._id} span={8} offset={8} >
-            <Story setVisible={setVisible} setSelectedId={setSelectedId} story={story}/>
+            <Story setVisible={setVisible} setSelectedId={setSelectedId} story={story} />
           </Col>
          )
        })}
