@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Layout, Image, Typography, Dropdown } from 'antd';
-import { LoginOutlined, LogoutOutlined, UserOutlined, FieldStringOutlined, SettingOutlined } from '@ant-design/icons';
+import { LoginOutlined, LogoutOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
 import Logo from '../../images/instaverse.png';
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../constants/actionTypes';
@@ -50,10 +50,11 @@ export default function AppBar() {
   const onClick = ({ key }) => {
    switch(key) {
     case '0':
-        navigate('/authform');
+        return navigate('/authform');
     case '1':
-        logout();
-    case '2':
+        return logout();
+    default:
+      break;
         
    }
   };

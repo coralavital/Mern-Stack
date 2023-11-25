@@ -1,12 +1,10 @@
 import { createStory, updateStory } from '../../actions/stories';
-import { Card, Form, Input, Typography, Button, Modal } from 'antd';
+import { Form, Input, Button, Modal, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './styles';
 import MediaLibrary from '../MediaLibrary/MediaLibrary';
-
 const { Title } = Typography;
 
 function StoryForm({ selectedId, setSelectedId, visible, setVisible }) {
@@ -50,19 +48,6 @@ function StoryForm({ selectedId, setSelectedId, visible, setVisible }) {
     form.resetFields();
     setSelectedId(null);
   };
-
-  if (!user) {
-    return (
-      <Card style={styles.formCard}>
-        <Title level={4}>
-          <span style={styles.formTitle}>Welcome to Instaverse!</span> <br />
-          Please <Link to='/authform'>login</Link> or{' '}
-          <Link to='/authform'>register</Link> for sharing instant moments or
-          ideas.
-        </Title>
-      </Card>
-    );
-  }
 
   return (
     <Modal

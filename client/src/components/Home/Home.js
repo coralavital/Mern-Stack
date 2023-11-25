@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import StoryList from '../StoryList';
 import StoryForm from '../StoryForm';
-import { Layout, Input, Button, Card } from 'antd';
+import { Layout, Input, Card, Typography } from 'antd';
 import styles from './styles';
 import { getStories } from '../../actions/stories';
+import Link from 'antd/es/typography/Link';
+const { Title } = Typography;
 
 const { Content } = Layout;
 
@@ -20,6 +22,20 @@ const Home = () => {
 
   const user = JSON.parse(localStorage.getItem('profile'));
   const username = user?.result?.username;
+
+  if (!user) {
+    return (
+      <Card style={styles.formCard}>
+        <Title level={4}>
+          <span style={styles.formTitle}>Welcome to Instaverse!</span> <br />
+          Please <Link to='/authform'>login</Link> or{' '}
+          <Link to='/authform'>register</Link> for sharing instant moments or
+          ideas.
+        </Title>
+      </Card>
+    );
+  }
+
 
   return (
     <Layout>

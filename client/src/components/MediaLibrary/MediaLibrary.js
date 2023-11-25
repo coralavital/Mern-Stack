@@ -1,8 +1,7 @@
 // components/media/MediaLibrary.js
-import React, { useContext } from 'react';
+import React from 'react';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-// import { AuthContext } from "../../context/auth";
 
 const { Dragger } = Upload;
 
@@ -14,10 +13,9 @@ const MediaLibrary = ({ form }) => {
     onChange(info) {
       const { status } = info.file;
       if (status !== 'uploading') {
-        // console.log(info.file, info.fileList);
+        console.log(info.file, info.fileList);
       }
       if (status === 'done') {
-        // console.log("############ ============> ", info.file.response);
         message.success(`${info.file.name} file uploaded successfully.`);
         getBase64(info.file.originFileObj, (url) => {form.setFieldsValue({ image: url })});
       } else if (status === 'error') {
