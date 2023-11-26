@@ -1,15 +1,17 @@
 // components/media/MediaLibrary.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 const { Dragger } = Upload;
 
 const MediaLibrary = ({ form }) => {
+  const [imageBase64List, setImageBase64List] = useState([]);
+
   const props = {
-    name: 'image',
+    name: 'images',
     listType: 'picture-card',
-    multiple: false,
+    multiple: true,
     onChange(info) {
       const { status } = info.file;
       if (status !== 'uploading') {
@@ -17,7 +19,11 @@ const MediaLibrary = ({ form }) => {
       }
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
-        getBase64(info.file.originFileObj, (url) => {form.setFieldsValue({ image: url })});
+          getBase64(info.file.originFileObj, (url) => {
+            // Append the new image to the existing list
+            imageBase64List.push(url);
+            form.setFieldsValue({ images: [ ...imageBase64List] }); // Update the form value with the image list
+          });
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }

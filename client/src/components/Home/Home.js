@@ -5,7 +5,7 @@ import StoryForm from '../StoryForm';
 import { Layout, Input, Card, Typography } from 'antd';
 import styles from './styles';
 import { getStories } from '../../actions/stories';
-import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
 const { Title } = Typography;
 
 const { Content } = Layout;
