@@ -16,13 +16,16 @@ app.use(cors());
 app.use("/stories", storyRoutes);
 app.use("/user", userRoutes);
 
-const MONGO_URI = process.env.MONGO_URI;
+app.get('/', (req, res) => {
+    res.send('Welcome to Instaverse API');
+})
+
 const PORT = process.env.PORT || 5001;
 
 const connectDB = async () => {
 
     try {
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(process.env.CONNECTION_URI);
         app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
     } catch (err) {
         console.error("Connection to MongoDB failed", err.message);
