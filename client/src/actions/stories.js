@@ -73,12 +73,12 @@ export const deleteComment = (id, comment) => async (dispatch) => {
   }
 };
 
-// export const likeComment = (id, item) => async (dispatch) => {
-//   try {
-//     const { data } = await api.likeComment(id, item);
+export const likeComment = (id, commentData) => async (dispatch) => {
+  try {
+    const { data } = await api.likeComment(id, commentData);
 
-//     dispatch({ type: UPDATE_STORY, payload: data });
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// };
+    dispatch({ type: UPDATE_STORY, payload: data });
+  } catch (err) {
+    console.log(err.message);
+  }
+};

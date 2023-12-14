@@ -1,60 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import StoryList from '../StoryList';
-import StoryForm from '../StoryForm';
-import { Layout, Input, Card, Typography } from 'antd';
+import { Layout, Card, Typography } from 'antd';
 import styles from './styles';
-import { getStories } from '../../actions/stories';
 import { Link } from 'react-router-dom';
-const { Title } = Typography;
+import SideBar from '../SideBar/SideBar';
+import Chat from '../ChatRoom/Chat';
+import Feed from '../Feed/Feed';
+import Account from '../Account/Account';
+import Profile from '../Profile/Profile';
+import { io } from 'socket.io-client';
+import { getUsers } from '../../actions/users';
 
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+const { Title } = Typography;
 const { Content } = Layout;
 
-const Home = () => {
-  const [selectedId, setSelectedId] = useState(null);
+const Home = ({ toggleTheme }) => {
   const dispatch = useDispatch();
-
-  const [visible, setVisible] = useState(false);
+  const allUsers = useSelector((state) => state.users);
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const userId = user?.result?._id;
+  const socket = useRef();
+  const [screenIndex, setScreenIndex] = useState(1);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
-    dispatch(getStories());
+    dispatch(getUsers());
   }, [dispatch]);
 
-  const user = JSON.parse(localStorage.getItem('profile'));
-  const username = user?.result?.username;
 
-  if (!user) {
-    return (
-      <Card style={styles.formCard}>
-        <Title level={4}>
-          <span style={styles.formTitle}>Welcome to Instaverse!</span> <br />
-          Please <Link to='/authform'>login</Link> or{' '}
-          <Link to='/authform'>register</Link> for sharing instant moments or
-          ideas.
-        </Title>
-      </Card>
-    );
-  }
+  useEffect(() => {
+    socket.current = io('ws://localhost:4000');
+  }, []);
 
+  useEffect(() => {
+    socket.current.emit('addUser', userId);
+    socket.current.on('getUsers', (users) => {
+      setOnlineUsers(
+        allUsers?.filter((f) =>
+          users.some((u) => u.userId === f._id && u.userId !== userId)
+        )
+      );
+    });
+  }, [userId, allUsers]);
 
   return (
-    <Layout>
-      <Content style={styles.content}>
-        <div>
-        <Card style={styles.formCard}>
-          <Input
-            type='primary'
-            style={styles.input}
-            onClick={() => setVisible(true)}
-            value={`So ${username}, tell me something...`}
-            allowClear={false}
-            
-          />
-          <StoryForm visible={visible} setVisible={setVisible} setSelectedId={setSelectedId} selectedId={selectedId}/>
-        </Card>
-        </div>
-        <StoryList setSelectedId={setSelectedId} setVisible={setVisible} />
-      </Content>
+    <Layout hasSider>
+      {user ? (
+        <SideBar
+          style={styles.siderStyle}
+          setScreenIndex={setScreenIndex}
+          screenIndex={screenIndex}
+          socket={socket}
+          toggleTheme={toggleTheme}
+        />
+      ) : null}
+      {!user ? (
+        <Content style={styles.content}>
+          <Card style={styles.auth}>
+            <Title level={4}>
+              <span style={styles.formTitle}>Welcome to Instaverse!</span>{' '}
+              <br />
+              Please <Link to='/authform'>login</Link> or{' '}
+              <Link to='/authform'>register</Link> for sharing instant moments
+              or ideas.
+            </Title>
+          </Card>
+        </Content>
+      ) : screenIndex === 1 ? (
+        <Feed />
+      ) : screenIndex === 2 ? (
+        <Chat
+          style={styles.chatCard}
+          socket={socket}
+          onlineUsers={onlineUsers}
+        />
+      ) : screenIndex === 3 ? (
+        <Profile dispatch={dispatch} />
+      ) : screenIndex === 4 ? (
+        <Account dispatch={dispatch} />
+      ) : null}
     </Layout>
   );
 };

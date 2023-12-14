@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Layout, Image, Typography, Dropdown } from 'antd';
-import { LoginOutlined, LogoutOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
-import Logo from '../../images/instaverse.png';
+import {
+  LoginOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons';
+import Logo from '../../images/likeme-logo.png';
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../constants/actionTypes';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
 import styles from './styles';
 
@@ -16,30 +20,7 @@ export default function AppBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-
-
-  const items = user
-    ? [
-        {
-            label: 'Setting',
-            key: '2',
-            icon: <SettingOutlined />
-        },
-        {
-          label: 'Logout',
-          key: '1',
-          icon: <LogoutOutlined />,
-        },
-      ]
-    : [
-        {
-          label: 'Login',
-          key: '0',
-          icon: <LoginOutlined />,
-        },
-      ];
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -47,17 +28,6 @@ export default function AppBar() {
     setUser(null);
   };
 
-  const onClick = ({ key }) => {
-   switch(key) {
-    case '0':
-        return navigate('/authform');
-    case '1':
-        return logout();
-    default:
-      break;
-        
-   }
-  };
   useEffect(() => {
     const token = user?.token;
 
@@ -70,35 +40,14 @@ export default function AppBar() {
   }, [location]);
 
   return (
-    <Header style={styles.header}>
+    <Header style={{...styles.header}}>
       <Link to='/'>
         <div style={styles.homeLink}>
-          <Image style={styles.image} preview={false} src={Logo} width={45} />
-          &nbsp;
-          <Title style={styles.title}>Instaverse</Title>
+          
+          
+          <Image preview={false} src={Logo} width={210} height={120} />
         </div>
       </Link>
-      {!user ? (
-        <div style={styles.userInfo}>
-          <Dropdown.Button
-            menu={{ items, onClick }}
-            placement='bottom'
-            icon={<UserOutlined />}
-          >
-            Hi
-          </Dropdown.Button>
-        </div>
-      ) : (
-        <div style={styles.userInfo}>
-          <Dropdown.Button
-            menu={{ items, onClick }}
-            placement='bottom'
-            icon={<UserOutlined />}
-          >
-            Hi, {user?.result?.username}
-          </Dropdown.Button>
-        </div>
-      )}
     </Header>
   );
 }
