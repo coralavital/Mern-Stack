@@ -55,7 +55,7 @@ By amalgamating these features, our application aims to offer a holistic and int
 
 ## Screenshots
 #### Sign up
-![light home screen](https://github.com/coralavital/Mern-Stack/client/assets/1)
+![light home screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/1.png)
 
 #### Recently detected products
 ![dark home screen](https://github.com/coralavital/Mern-Stack/client/assets/2)
