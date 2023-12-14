@@ -54,18 +54,36 @@ Furthermore, the app provides users with the ability to manage their details, em
 By amalgamating these features, our application aims to offer a holistic and interactive platform, enhancing user engagement and convenience in various aspects of their digital interactions.
 
 ## Screenshots
-![light home screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/1.png)
 
-![dark home screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/2.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/1.png" alt="light home screen" width="600">
+</div>
 
-![dark comment on post screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/3.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/2.png" alt="dark home screen" width="600">
+</div>
 
-![share story screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/4.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/3.png" alt="dark comment on post screen" width="600">
+</div>
 
-![chat room screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/5.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/4.png" alt="share story screen" width="600">
+</div>
 
-![login screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/6.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/5.png" alt="chat room screen" width="600">
+</div>
 
-![active chat multiple participants screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/7.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/6.png" alt="login screen" width="600">
+</div>
 
-![active chat actions screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/8.png)
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/7.png" alt="active chat multiple participants screen" width="600">
+</div>
+
+<div>
+  <img src="https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/8.png" alt="active chat actions screen" width="600">
+</div>
+
