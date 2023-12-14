@@ -54,14 +54,18 @@ Furthermore, the app provides users with the ability to manage their details, em
 By amalgamating these features, our application aims to offer a holistic and interactive platform, enhancing user engagement and convenience in various aspects of their digital interactions.
 
 ## Screenshots
-#### Sign up
 ![light home screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/1.png)
 
-#### Recently detected products
-![dark home screen](https://github.com/coralavital/Mern-Stack/client/assets/2)
+![dark home screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/2.png)
 
-#### Shopping list
-![dark comment on post screen](https://github.com/coralavital/Mern-Stack/client/assets/3)
+![dark comment on post screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/3.png)
 
-#### All detected products
-![share story screen](https://github.com/coralavital/Mern-Stack/client/assets/4)
+![share story screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/4.png)
+
+![chat room screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/5.png)
+
+![login screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/6.png)
+
+![active chat multiple participants screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/7.png)
+
+![active chat actions screen](https://raw.githubusercontent.com/coralavital/Mern-Stack/main/client/assets/8.png)
