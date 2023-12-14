@@ -3,8 +3,8 @@ import Story from '../models/storyContent.js';
 
 const getStories = async (req, res) => {
   try {
-    const story = await Story.find();
-    res.status(200).json(story);
+    const stories = await Story.find();
+    res.status(200).json(stories);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -92,7 +92,7 @@ const addComment = async (req, res) => {
   const comment = req.body;
   story.comments.push(comment);
 
-  story.comments.sort((a,b) => b.postDate - a.postDate);
+  story.comments.sort((a, b) => b.postDate - a.postDate);
 
   const updatedStory = await Story.findByIdAndUpdate(id, story, { new: true });
 
@@ -113,42 +113,54 @@ const deleteComment = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(comment.commentId)) {
     return res.status(404).send('This id doesnt belong to any story');
   }
-  
+
   story.comments = story.comments.filter(
     (item) => String(item._id) !== comment.commentId
   );
 
-  story.comments.sort((a,b) => b.postDate - a.postDate);
+  story.comments.sort((a, b) => b.postDate - a.postDate);
 
   const updatedStory = await Story.findByIdAndUpdate(id, story, { new: true });
   res.json(updatedStory);
-
 };
 
-// const likeComment = async (req, res) => {
-//   const { id } = req.params;
-//   const item = req.body;
+const likeComment = async (req, res) => {
+  const { id } = req.params;
 
-//   if (!req.userId) return res.json({ message: 'Unauthenticated User' });
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('This id doesnt belong to any story');
+  }
 
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(404).send('This id doesnt belong to any story');
-//   }
+  const { commentId, userId } = req.body;
 
-//   const story = await Story.findById(id);
+  try {
+    // Find the story by ID
+    const story = await Story.findById(id);
 
-//   const index = story.comments.findIndex((comment) => comment._id === item._id);
-//   console.log(index)
-//   if (index === -1) {
-//     // if user has not liked the story
-//     story.comments.index.likes.push(req.userId);
-//   } else {
-//     story.comments.index.likes = story.comments.index.likes.filter((id) => id !== String(req.userId));
-//   }
+    // Find the comment within the story by ID
+    const comment = story.comments.id(commentId);
 
-//   const updatedStory = await Story.findByIdAndUpdate(id, story, { new: true });
-//   res.json(updatedStory);
-// };
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment not found' });
+    }
+
+    const index = comment.likes.findIndex((id) => id === userId);
+
+    if (index === -1) {
+      // if user has not liked the story
+      comment.likes.push(userId);
+    } else {
+      comment.likes = comment.likes.filter((id) => id !== userId);
+    }
+
+    // Save the updated story
+    const updatedStory = await story.save();
+    res.json(updatedStory);
+    
+  } catch (error) {
+    res.status(500).json({ msg: 'Something went wrong' });
+  }
+};
 
 export {
   getStories,
@@ -158,5 +170,5 @@ export {
   likeStory,
   addComment,
   deleteComment,
-  // likeComment,
+  likeComment,
 };
