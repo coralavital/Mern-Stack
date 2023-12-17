@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: 'https://instaverse-api-12e5dbb92606.herokuapp.com/' });
+const api = axios.create({ baseURL: 'https://likeu-api.onrender.com/' });
 
 api.interceptors.request.use((req) => {
 
