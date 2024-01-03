@@ -47,7 +47,7 @@ These commands will install the required dependencies for both the server and cl
 
 
 ## Features
-Our application encompasses a spectrum of functionalities aimed at simplifying users' lives through a streamlined experience. The app offers user registration and login functionalities with JWT authentication, ensuring secure access and authorization for each user.
+This application encompasses a spectrum of functionalities aimed at simplifying users' lives through a streamlined experience. The app offers user registration and login functionalities with JWT authentication, ensuring secure access and authorization for each user.
 Users can create, edit, or delete their stories, enabling them to share their experiences seamlessly. Additionally, they can explore and interact with posts from other users, expressing their interest through likes and comments.
 A pivotal feature includes a chat room facilitating real-time messaging between users, fostering engaging conversations and connections.
 Furthermore, the app provides users with the ability to manage their details, empowering them to update information, change passwords, or opt for account deletion if necessary.
